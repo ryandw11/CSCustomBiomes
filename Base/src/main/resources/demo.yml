@@ -1,0 +1,8 @@
+CustomBiomes:
+  BiomeKey:
+    Namespace: 'minecraft'
+    Key: 'midlands_end'
+  Depth: [0;1]
+  Scale: [0;1]
+  BaseTemp: [0;1]
+  Category: 'taiga'

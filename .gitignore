@@ -1,0 +1,9 @@
+/target/
+*.iml
+/.idea/
+dependency-reduced-pom.xml
+# Project exclude paths
+/Base/target/
+/NMS-1.15/target/
+/NMS-1.16-R3/target/
+/NMS-1.17/target/

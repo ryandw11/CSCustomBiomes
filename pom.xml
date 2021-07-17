@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ryandw11</groupId>
+    <artifactId>CSCustomBiomes</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>Base</module>
+        <module>NMS-1.16-R3</module>
+        <module>NMS-1.15</module>
+    </modules>
+
+    <profiles>
+        <profile>
+            <id>1.17 Build Conditions</id>
+            <activation>
+                <property>
+                    <name>java.version</name>
+                    <value>16</value>
+                </property>
+            </activation>
+            <modules>
+                <module>NMS-1.17</module>
+            </modules>
+        </profile>
+    </profiles>
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>16</java.version>
+        <plugin.version>1.0-SNAPSHOT</plugin.version>
+    </properties>
+
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.1</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <serverId>nexus</serverId>
+                    <nexusUrl>https://repo.ryandw11.com/nexus/</nexusUrl>
+                    <skipStaging>true</skipStaging>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>Ryandw11 Repo</id>
+            <url>https://repo.ryandw11.com/repository/maven-releases/</url>
+        </repository>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+
+</project>
