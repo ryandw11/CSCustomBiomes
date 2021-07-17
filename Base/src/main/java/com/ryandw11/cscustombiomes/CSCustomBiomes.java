@@ -6,6 +6,11 @@ import com.ryandw11.structure.api.structaddon.StructureSection;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * An addon for Custom Biome support with Custom Structures.
+ *
+ * @version 1.0
+ */
 public class CSCustomBiomes extends JavaPlugin {
 
     @Override

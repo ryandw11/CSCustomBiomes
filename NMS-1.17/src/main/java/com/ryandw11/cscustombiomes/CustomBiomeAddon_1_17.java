@@ -62,7 +62,6 @@ public class CustomBiomeAddon_1_17 implements StructureSection {
             DedicatedServer dedicatedServer = ((CraftServer) Bukkit.getServer()).getServer();
 
             IRegistryWritable<BiomeBase> registry = dedicatedServer.getCustomRegistry().b(IRegistry.aO);
-            Bukkit.getLogger().info("Key: " + registry.getKey(biomeBase));
 
             MinecraftKey biomeKey = registry.getKey(biomeBase);
 
@@ -78,9 +77,9 @@ public class CustomBiomeAddon_1_17 implements StructureSection {
             }
 
             // Check the depth, scale, and base temp conditions.
-            if(!checkData(depthData, biomeBase.h())) return false;
-            if(!checkData(scaleData, biomeBase.j())) return false;
-            if(!checkData(baseTempData, biomeBase.k())) return false;
+            if (!checkData(depthData, biomeBase.h())) return false;
+            if (!checkData(scaleData, biomeBase.j())) return false;
+            if (!checkData(baseTempData, biomeBase.k())) return false;
 
 
         } catch (NoSuchFieldException | IllegalAccessException e) {
@@ -97,7 +96,7 @@ public class CustomBiomeAddon_1_17 implements StructureSection {
      * @return If the data matches up in the range or exact value.
      */
     private boolean checkData(@Nullable String data, float inputData) {
-        if(data == null) return true;
+        if (data == null) return true;
 
         try {
             return Float.parseFloat(data) == inputData;

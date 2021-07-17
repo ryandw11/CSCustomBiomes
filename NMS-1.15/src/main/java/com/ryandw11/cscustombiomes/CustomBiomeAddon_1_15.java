@@ -2,12 +2,11 @@ package com.ryandw11.cscustombiomes;
 
 import com.ryandw11.structure.api.structaddon.StructureSection;
 import com.ryandw11.structure.structure.Structure;
-import net.minecraft.server.v1_15_R1.*;
-import org.bukkit.Bukkit;
+import net.minecraft.server.v1_15_R1.BiomeBase;
+import net.minecraft.server.v1_15_R1.WorldServer;
 import org.bukkit.Chunk;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.craftbukkit.v1_15_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_15_R1.block.CraftBlock;
 import org.jetbrains.annotations.Nullable;
 
@@ -60,9 +59,9 @@ public class CustomBiomeAddon_1_15 implements StructureSection {
             }
 
             // Check the depth, scale, and base temp conditions.
-            if(!checkData(depthData, biomeBase.i())) return false;
-            if(!checkData(scaleData, biomeBase.m())) return false;
-            if(!checkData(baseTempData, biomeBase.getTemperature())) return false;
+            if (!checkData(depthData, biomeBase.i())) return false;
+            if (!checkData(scaleData, biomeBase.m())) return false;
+            if (!checkData(baseTempData, biomeBase.getTemperature())) return false;
 
 
         } catch (NoSuchFieldException | IllegalAccessException e) {
@@ -79,7 +78,7 @@ public class CustomBiomeAddon_1_15 implements StructureSection {
      * @return If the data matches up in the range or exact value.
      */
     private boolean checkData(@Nullable String data, float inputData) {
-        if(data == null) return true;
+        if (data == null) return true;
 
         try {
             return Float.parseFloat(data) == inputData;
