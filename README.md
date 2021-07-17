@@ -3,7 +3,7 @@ CSCustomBiomes is an addon for the [Custom Structures](https://github.com/ryandw
 structures to only spawning in Custom Biomes.
 
 ## Usage
-Download the correct jar file for your Java version from [ci.ryandw11.com]().  
+Download the correct jar file for your Java version from [ci.ryandw11.com](https://ci.ryandw11.com/job/CSCustomBiomes/).  
   
 Put tha jar file in your `plugins` folder and start the server.
   
