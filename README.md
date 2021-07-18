@@ -5,7 +5,7 @@ structures to only spawning in Custom Biomes.
 ## Usage
 Download the correct jar file for your Java version from [ci.ryandw11.com](https://ci.ryandw11.com/job/CSCustomBiomes/).  
   
-Put tha jar file in your `plugins` folder and start the server.
+Put the jar file in your `plugins` folder and start the server.
   
 You can now configure your structure config file with the CustomBiomes configuration section.  
   
@@ -23,6 +23,13 @@ CustomBiomes:
 
 ## Compiling
 Compiling CSCustomBiomes is a little different since it needs to support multiple Java and Minecraft versions.
+  
+You must build the following versions of spigot first:
+```
+java -jar BuildTools.jar --rev 1.17.1
+java -jar BuildTools.jar --rev 1.16.4
+java -jar BuildTools.jar --rev 1.15.2
+```
   
 ### Compiling for Java 8
 To compile for Java 8 run the following Maven command:

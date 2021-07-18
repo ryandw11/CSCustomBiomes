@@ -48,6 +48,9 @@ public class CSCustomBiomes extends JavaPlugin {
             case "v1_15_R1":
                 customBiomesAddon.addStructureSection(CustomBiomeAddon_1_15.class);
                 break;
+            default:
+                getLogger().severe("The Custom Biomes addon does not support the version " + version + " of minecraft!");
+                return;
         }
 
         customStructuresAPI.registerCustomAddon(customBiomesAddon);
