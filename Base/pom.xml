@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.ryandw11</groupId>
         <artifactId>CSCustomBiomes</artifactId>
-        <version>1.0</version>
+        <version>1.0.1</version>
     </parent>
     <artifactId>Base</artifactId>
     <version>1.0</version>
@@ -98,6 +98,12 @@
                 <dependency>
                     <groupId>com.ryandw11</groupId>
                     <artifactId>NMS-1.17</artifactId>
+                    <version>1.0</version>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.ryandw11</groupId>
+                    <artifactId>NMS-1.18</artifactId>
                     <version>1.0</version>
                     <scope>compile</scope>
                 </dependency>
