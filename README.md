@@ -36,6 +36,7 @@ Compiling CSCustomBiomes is a little different since it needs to support multipl
   
 You must build the following versions of spigot first:
 ```
+java -jar BuildTools.jar --rev 1.18.2 --remapped
 java -jar BuildTools.jar --rev 1.18 --remapped
 java -jar BuildTools.jar --rev 1.17.1
 java -jar BuildTools.jar --rev 1.16.4

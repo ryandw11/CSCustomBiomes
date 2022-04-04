@@ -30,6 +30,18 @@ public class CSCustomBiomes extends JavaPlugin {
 
 
         switch (version) {
+            case "v1_18_R2":
+                // Use reflection to see if newer mc versions are included.
+                try {
+                    Class<? extends StructureSection> cs_1_18_2 = (Class<? extends StructureSection>) Class.forName("com.ryandw11.cscustombiomes.CustomBiomeAddon_1_18_2");
+                    customBiomesAddon.addStructureSection(cs_1_18_2);
+                } catch (ClassNotFoundException ex) {
+                    getLogger().severe("A fatal error has occurred!");
+                    getLogger().severe("It appears that the addon has been compiled with the wrong version of Java!");
+                    getLogger().severe("Please ensure that you downloaded the right version or compiled the addon with Java 16+!");
+                    return;
+                }
+                break;
             case "v1_18_R1":
                 // Use reflection to see if newer mc versions are included.
                 try {

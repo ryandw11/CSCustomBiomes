@@ -26,6 +26,7 @@
             <modules>
                 <module>NMS-1.17</module>
                 <module>NMS-1.18</module>
+                <module>NMS-1.18.2</module>
             </modules>
         </profile>
     </profiles>
