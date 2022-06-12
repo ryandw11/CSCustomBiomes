@@ -7,6 +7,7 @@ import net.minecraft.core.WritableRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -53,7 +54,7 @@ public class CustomBiomeAddon_1_19 implements StructureSection {
         try {
             Field world = CraftBlock.class.getDeclaredField("world");
             world.setAccessible(true);
-            ServerLevel worldServer = (ServerLevel) world.get(craftBlock);
+            ServerLevel worldServer = ((LevelAccessor) world.get(craftBlock)).getMinecraftWorld();
             Biome biomeBase = worldServer.getBiome(craftBlock.getPosition()).value();
 
             DedicatedServer dedicatedServer = ((CraftServer) Bukkit.getServer()).getServer();
