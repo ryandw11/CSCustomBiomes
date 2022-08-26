@@ -66,7 +66,7 @@ public class CustomBiomeAddon_1_18_2 implements StructureSection {
             // Check if the MinecraftKey matches if applicable.
             if (biomeNamespace != null && this.biomeKey != null && biomeKey != null) {
                 if (!biomeNamespace.equalsIgnoreCase(biomeKey.getNamespace())) return false;
-                if (!this.biomeKey.equalsIgnoreCase(biomeKey.getNamespace())) return false;
+                if (!this.biomeKey.equalsIgnoreCase(biomeKey.getKey())) return false;
             }
 
             // Check if the biome category is valid.
