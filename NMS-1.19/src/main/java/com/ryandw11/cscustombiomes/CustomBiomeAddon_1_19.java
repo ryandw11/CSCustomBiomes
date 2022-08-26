@@ -66,7 +66,7 @@ public class CustomBiomeAddon_1_19 implements StructureSection {
             // Check if the MinecraftKey matches if applicable.
             if (biomeNamespace != null && this.biomeKey != null && biomeKey != null) {
                 if (!biomeNamespace.equalsIgnoreCase(biomeKey.getNamespace())) return false;
-                if (!this.biomeKey.equalsIgnoreCase(biomeKey.getKey())) return false;
+                if (!this.biomeKey.equalsIgnoreCase(biomeKey.getPath())) return false;
             }
 
             // Check the depth, scale, and base temp conditions.
