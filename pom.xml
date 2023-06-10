@@ -6,37 +6,21 @@
 
     <groupId>com.ryandw11</groupId>
     <artifactId>CSCustomBiomes</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
 
     <modules>
         <module>Base</module>
-        <module>NMS-1.16-R3</module>
-        <module>NMS-1.15</module>
+        <module>Interfaces</module>
+        <module>NMS-1.18.2</module>
+        <module>NMS-1.19</module>
+        <module>NMS-1.20</module>
     </modules>
-
-    <profiles>
-        <profile>
-            <id>Java 16+ Build Conditions</id>
-            <activation>
-                <property>
-                    <name>java.version</name>
-                    <value>16</value>
-                </property>
-            </activation>
-            <modules>
-                <module>NMS-1.17</module>
-                <module>NMS-1.18</module>
-                <module>NMS-1.18.2</module>
-                <module>NMS-1.19</module>
-            </modules>
-        </profile>
-    </profiles>
 
     <packaging>pom</packaging>
 
     <properties>
         <java.version>16</java.version>
-        <plugin.version>1.0-SNAPSHOT</plugin.version>
+        <plugin.version>1.1.0-SNAPSHOT</plugin.version>
     </properties>
 
     <build>

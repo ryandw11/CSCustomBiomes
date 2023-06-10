@@ -29,7 +29,7 @@ public class CustomBiomeAddon_1_18_2 implements StructureSection {
 
     @Override
     public String getName() {
-        return "CustomBiomes";
+        return "LegacyCustomBiomes";
     }
 
     @Override

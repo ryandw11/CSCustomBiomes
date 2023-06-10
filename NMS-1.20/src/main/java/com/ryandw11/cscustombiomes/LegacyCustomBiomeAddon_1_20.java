@@ -3,7 +3,7 @@ package com.ryandw11.cscustombiomes;
 import com.ryandw11.structure.api.structaddon.StructureSection;
 import com.ryandw11.structure.structure.Structure;
 import net.minecraft.core.Registry;
-import net.minecraft.core.WritableRegistry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.level.ServerLevel;
@@ -13,13 +13,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_19_R1.block.CraftBlock;
+import org.bukkit.craftbukkit.v1_20_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_20_R1.block.CraftBlock;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 
-public class CustomBiomeAddon_1_19 implements StructureSection {
+public class LegacyCustomBiomeAddon_1_20 implements StructureSection {
 
     private String biomeNamespace;
     private String biomeKey;
@@ -59,7 +59,7 @@ public class CustomBiomeAddon_1_19 implements StructureSection {
 
             DedicatedServer dedicatedServer = ((CraftServer) Bukkit.getServer()).getServer();
 
-            WritableRegistry<Biome> registry = (WritableRegistry<Biome>) dedicatedServer.registryAccess().ownedRegistry(Registry.BIOME_REGISTRY).get();
+            Registry<Biome> registry = dedicatedServer.registryAccess().registryOrThrow(Registries.BIOME);
 
             ResourceLocation biomeKey = registry.getKey(biomeBase);
 
@@ -70,7 +70,7 @@ public class CustomBiomeAddon_1_19 implements StructureSection {
             }
 
             // Check the depth, scale, and base temp conditions.
-            if (!checkData(downFall, biomeBase.getDownfall())) return false;
+            if (!checkData(downFall, biomeBase.climateSettings.downfall())) return false;
             if (!checkData(baseTempData, biomeBase.getBaseTemperature())) return false;
 
 

@@ -1,9 +1,4 @@
 CustomBiomes:
-  Namespaces: []
-CustomBiomeRange:
-  BaseTemp: 0.4
-  DownFall: [0;1]
-LegacyCustomBiomes:
   BiomeKey:
     Namespace: 'minecraft'
     Key: 'midlands_end'

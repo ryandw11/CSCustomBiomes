@@ -1,0 +1,7 @@
+name: CSCustomBiomes
+version: 1.0.1
+main: com.ryandw11.cscustombiomes.CSCustomBiomes
+author: Ryandw11
+description: An addon for custom structures which allows semi-custom biome support.
+depend: [CustomStructures]
+api-version: 1.13

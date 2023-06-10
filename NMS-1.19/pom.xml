@@ -7,10 +7,10 @@
     <parent>
         <groupId>com.ryandw11</groupId>
         <artifactId>CSCustomBiomes</artifactId>
-        <version>1.0.1</version>
+        <version>1.1.0</version>
     </parent>
     <artifactId>NMS-1.19</artifactId>
-    <version>1.0</version>
+    <version>1.1.0</version>
 
     <properties>
         <java.version>16</java.version>
@@ -126,6 +126,12 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>com.ryandw11</groupId>
+            <artifactId>Interfaces</artifactId>
+            <version>1.1.0</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>com.ryandw11</groupId>
             <artifactId>CustomStructures</artifactId>

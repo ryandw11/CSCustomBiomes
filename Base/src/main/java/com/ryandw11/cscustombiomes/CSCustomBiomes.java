@@ -1,20 +1,33 @@
 package com.ryandw11.cscustombiomes;
 
+import com.ryandw11.cscustombiomes.addon.CustomBiomeRangeSection;
+import com.ryandw11.cscustombiomes.addon.CustomBiomesSection;
+import com.ryandw11.cscustombiomes.commands.InspectBiomeCommand;
 import com.ryandw11.structure.api.CustomStructuresAPI;
 import com.ryandw11.structure.api.structaddon.CustomStructureAddon;
-import com.ryandw11.structure.api.structaddon.StructureSection;
 import org.bukkit.Bukkit;
+import org.bukkit.block.Block;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
 /**
  * An addon for Custom Biome support with Custom Structures.
  *
- * @version 1.0
+ * @version 1.1.0
  */
 public class CSCustomBiomes extends JavaPlugin {
 
+    private static CSCustomBiomes instance;
+
+    private Class<? extends BiomeBaser> biomeBaser;
+    private MinecraftVersion minecraftVersion = MinecraftVersion.vUnknown;
+
     @Override
     public void onEnable() {
+        instance = this;
+
         CustomStructureAddon customBiomesAddon = new CustomStructureAddon(this);
 
         CustomStructuresAPI customStructuresAPI = new CustomStructuresAPI();
@@ -28,61 +41,26 @@ public class CSCustomBiomes extends JavaPlugin {
             return;
         }
 
+        customBiomesAddon.addStructureSection(CustomBiomesSection.class);
+        customBiomesAddon.addStructureSection(CustomBiomeRangeSection.class);
+
+        Objects.requireNonNull(getCommand("biomeinspect")).setExecutor(new InspectBiomeCommand());
 
         switch (version) {
+            case "v1_20_R1":
+                minecraftVersion = MinecraftVersion.v1_20_0;
+                biomeBaser = BiomeBaser_1_20.class;
+                customBiomesAddon.addStructureSection(LegacyCustomBiomeAddon_1_20.class);
+                break;
             case "v1_19_R1":
-                // Use reflection to see if newer mc versions are included.
-                try {
-                    Class<? extends StructureSection> cs_1_19 = (Class<? extends StructureSection>) Class.forName("com.ryandw11.cscustombiomes.CustomBiomeAddon_1_19");
-                    customBiomesAddon.addStructureSection(cs_1_19);
-                } catch (ClassNotFoundException ex) {
-                    getLogger().severe("A fatal error has occurred!");
-                    getLogger().severe("It appears that the addon has been compiled with the wrong version of Java!");
-                    getLogger().severe("Please ensure that you downloaded the right version or compiled the addon with Java 16+!");
-                    return;
-                }
+                minecraftVersion = MinecraftVersion.v_1_19_0;
+                biomeBaser = BiomeBaser_1_19.class;
+                customBiomesAddon.addStructureSection(CustomBiomeAddon_1_19.class);
                 break;
             case "v1_18_R2":
-                // Use reflection to see if newer mc versions are included.
-                try {
-                    Class<? extends StructureSection> cs_1_18_2 = (Class<? extends StructureSection>) Class.forName("com.ryandw11.cscustombiomes.CustomBiomeAddon_1_18_2");
-                    customBiomesAddon.addStructureSection(cs_1_18_2);
-                } catch (ClassNotFoundException ex) {
-                    getLogger().severe("A fatal error has occurred!");
-                    getLogger().severe("It appears that the addon has been compiled with the wrong version of Java!");
-                    getLogger().severe("Please ensure that you downloaded the right version or compiled the addon with Java 16+!");
-                    return;
-                }
-                break;
-            case "v1_18_R1":
-                // Use reflection to see if newer mc versions are included.
-                try {
-                    Class<? extends StructureSection> cs_1_18 = (Class<? extends StructureSection>) Class.forName("com.ryandw11.cscustombiomes.CustomBiomeAddon_1_18");
-                    customBiomesAddon.addStructureSection(cs_1_18);
-                } catch (ClassNotFoundException ex) {
-                    getLogger().severe("A fatal error has occurred!");
-                    getLogger().severe("It appears that the addon has been compiled with the wrong version of Java!");
-                    getLogger().severe("Please ensure that you downloaded the right version or compiled the addon with Java 16+!");
-                    return;
-                }
-                break;
-            case "v1_17_R1":
-                // Use reflection to see if newer mc versions are included.
-                try {
-                    Class<? extends StructureSection> cs_1_17 = (Class<? extends StructureSection>) Class.forName("com.ryandw11.cscustombiomes.CustomBiomeAddon_1_17");
-                    customBiomesAddon.addStructureSection(cs_1_17);
-                } catch (ClassNotFoundException ex) {
-                    getLogger().severe("A fatal error has occurred!");
-                    getLogger().severe("It appears that the addon has been compiled with the wrong version of Java!");
-                    getLogger().severe("Please ensure that you downloaded the right version or compiled the addon with Java 16+!");
-                    return;
-                }
-                break;
-            case "v1_16_R3":
-                customBiomesAddon.addStructureSection(CustomBiomeAddon_1_16_R3.class);
-                break;
-            case "v1_15_R1":
-                customBiomesAddon.addStructureSection(CustomBiomeAddon_1_15.class);
+                minecraftVersion = MinecraftVersion.v1_18_2;
+                biomeBaser = BiomeBaser_1_18_2.class;
+                customBiomesAddon.addStructureSection(CustomBiomeAddon_1_18_2.class);
                 break;
             default:
                 getLogger().severe("The Custom Biomes addon does not support the version " + version + " of minecraft!");
@@ -90,5 +68,33 @@ public class CSCustomBiomes extends JavaPlugin {
         }
 
         customStructuresAPI.registerCustomAddon(customBiomesAddon);
+    }
+
+    public static CSCustomBiomes getInstance() {
+        return instance;
+    }
+
+    /**
+     * Get the biome baser for a block depending on the current Minecraft version.
+     *
+     * @param block The block.
+     * @return The correct biome baser. (Null if invalid version).
+     */
+    public BiomeBaser getBiomeBaserForBlock(Block block) {
+        if (biomeBaser == null) {
+            return null;
+        }
+
+        try {
+            return biomeBaser.getDeclaredConstructor(Block.class).newInstance(block);
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
+                 InvocationTargetException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public MinecraftVersion getMinecraftVersion() {
+        return minecraftVersion;
     }
 }
