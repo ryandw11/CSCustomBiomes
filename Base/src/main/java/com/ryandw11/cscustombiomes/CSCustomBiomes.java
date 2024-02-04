@@ -47,10 +47,20 @@ public class CSCustomBiomes extends JavaPlugin {
         Objects.requireNonNull(getCommand("biomeinspect")).setExecutor(new InspectBiomeCommand());
 
         switch (version) {
+            case "v1_20_R3":
+                minecraftVersion = MinecraftVersion.v1_20_4;
+                biomeBaser = BiomeBaser_1_20_4.class;
+                customBiomesAddon.addStructureSection(LegacyCustomBiomeAddon_1_20_4.class);
+                break;
             case "v1_20_R1":
                 minecraftVersion = MinecraftVersion.v1_20_0;
                 biomeBaser = BiomeBaser_1_20.class;
                 customBiomesAddon.addStructureSection(LegacyCustomBiomeAddon_1_20.class);
+                break;
+            case "v1_19_R3":
+                minecraftVersion = MinecraftVersion.v1_19_4;
+                biomeBaser = BiomeBaser_1_19_4.class;
+                customBiomesAddon.addStructureSection(CustomBiomeAddon_1_19_4.class);
                 break;
             case "v1_19_R1":
                 minecraftVersion = MinecraftVersion.v_1_19_0;
