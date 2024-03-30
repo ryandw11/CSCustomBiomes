@@ -52,6 +52,11 @@ public class CSCustomBiomes extends JavaPlugin {
                 biomeBaser = BiomeBaser_1_20_4.class;
                 customBiomesAddon.addStructureSection(LegacyCustomBiomeAddon_1_20_4.class);
                 break;
+            case "v1_20_R2":
+                minecraftVersion = MinecraftVersion.v1_20_2;
+                biomeBaser = BiomeBaser_1_20_2.class;
+                customBiomesAddon.addStructureSection(LegacyCustomBiomeAddon_1_20_2.class);
+                break;
             case "v1_20_R1":
                 minecraftVersion = MinecraftVersion.v1_20_0;
                 biomeBaser = BiomeBaser_1_20.class;
