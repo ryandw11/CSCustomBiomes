@@ -34,12 +34,13 @@ public class CSCustomBiomes extends JavaPlugin {
 
         String version;
         try {
-            version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
+            version = Bukkit.getBukkitVersion().split("-")[0];
         } catch (ArrayIndexOutOfBoundsException ex) {
             getLogger().severe("A fatal error has occurred!");
             getLogger().severe("Unable to determine server version!");
             return;
         }
+        getLogger().info("Using version " + version);
 
         customBiomesAddon.addStructureSection(CustomBiomesSection.class);
         customBiomesAddon.addStructureSection(CustomBiomeRangeSection.class);
@@ -47,37 +48,42 @@ public class CSCustomBiomes extends JavaPlugin {
         Objects.requireNonNull(getCommand("biomeinspect")).setExecutor(new InspectBiomeCommand());
 
         switch (version) {
-            case "v1_20_R4":
+            case "1.21":
+                minecraftVersion = MinecraftVersion.v1_21_0;
+                biomeBaser = BiomeBaser_1_21.class;
+                customBiomesAddon.addStructureSection(LegacyCustomBiomeAddon_1_21.class);
+                break;
+            case "1.20.6":
                 minecraftVersion = MinecraftVersion.v1_20_6;
                 biomeBaser = BiomeBaser_1_20_6.class;
                 customBiomesAddon.addStructureSection(LegacyCustomBiomeAddon_1_20_6.class);
                 break;
-            case "v1_20_R3":
+            case "1.20.4":
                 minecraftVersion = MinecraftVersion.v1_20_4;
                 biomeBaser = BiomeBaser_1_20_4.class;
                 customBiomesAddon.addStructureSection(LegacyCustomBiomeAddon_1_20_4.class);
                 break;
-            case "v1_20_R2":
+            case "1.20.2":
                 minecraftVersion = MinecraftVersion.v1_20_2;
                 biomeBaser = BiomeBaser_1_20_2.class;
                 customBiomesAddon.addStructureSection(LegacyCustomBiomeAddon_1_20_2.class);
                 break;
-            case "v1_20_R1":
+            case "1.20":
                 minecraftVersion = MinecraftVersion.v1_20_0;
                 biomeBaser = BiomeBaser_1_20.class;
                 customBiomesAddon.addStructureSection(LegacyCustomBiomeAddon_1_20.class);
                 break;
-            case "v1_19_R3":
+            case "1.19.4":
                 minecraftVersion = MinecraftVersion.v1_19_4;
                 biomeBaser = BiomeBaser_1_19_4.class;
                 customBiomesAddon.addStructureSection(CustomBiomeAddon_1_19_4.class);
                 break;
-            case "v1_19_R1":
+            case "1.19":
                 minecraftVersion = MinecraftVersion.v_1_19_0;
                 biomeBaser = BiomeBaser_1_19.class;
                 customBiomesAddon.addStructureSection(CustomBiomeAddon_1_19.class);
                 break;
-            case "v1_18_R2":
+            case "1.18.2":
                 minecraftVersion = MinecraftVersion.v1_18_2;
                 biomeBaser = BiomeBaser_1_18_2.class;
                 customBiomesAddon.addStructureSection(CustomBiomeAddon_1_18_2.class);
