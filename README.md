@@ -27,6 +27,8 @@ You can do this by running build tools on the user you want to compile the plugi
 
 Here are the required versions (Java 22+ required):
 ```
+java -jar BuildTools.jar --rev 1.21.5 --remapped
+java -jar BuildTools.jar --rev 1.21 --remapped
 java -jar BuildTools.jar --rev 1.20.6 --remapped
 ```
 Here are the required versions (Java 17-21 required):
